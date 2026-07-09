@@ -1,0 +1,22 @@
+[package]
+name = "geolocation-apple"
+version = "0.1.5"
+edition = "2024"
+build = "build.rs"
+
+[dependencies]
+async-trait = "0.1.89"
+clap = { version = "4.6.1", features = ["cargo", "derive", "help"] }
+geo = "0.33.1"
+protobuf = "3.7.2"
+regex = "1.12.4"
+reqwest = { version = "0.13.4", default-features = false, features = ["http2", "gzip", "deflate", "rustls", "charset"] }
+snafu = "0.9.1"
+tokio = { version = "1.52.3", features = ["rt-multi-thread", "macros"] }
+
+[build-dependencies]
+protobuf-codegen = "3.7.2"
+protobuf-parse = "3.7.2"
+
+[dev-dependencies]
+tokio = { version = "1.52.3", features = ["rt-multi-thread", "macros"] }

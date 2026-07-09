@@ -1,0 +1,30 @@
+// Protocol for gs-loc.apple.com/clls/wloc (Apple's Wi-Fi Positioning Service).
+// Field semantics reverse-engineered by acheong08/apple-corelocation-experiments:
+// https://github.com/acheong08/apple-corelocation-experiments/blob/master/pb/BSSIDApple.proto
+message WifiDevice {
+	required string bssid = 1;
+	message Location {
+		optional int64 latitude = 1;            // scaled by 1e8; -18000000000 (-180) means "unknown"
+		optional int64 longitude = 2;           // scaled by 1e8; -18000000000 (-180) means "unknown"
+		optional int64 horizontal_accuracy = 3; // metres; -1 when the BSSID is unknown
+		optional int64 unknown_value4 = 4;
+		optional int64 altitude = 5;
+		optional int64 vertical_accuracy = 6;
+		optional int64 speed = 7;
+		optional int64 course = 8;
+		optional int64 timestamp = 9;
+		optional int64 unknown_value10 = 10;
+		optional int64 motion_activity_type = 11;
+		optional int64 motion_activity_confidence = 12;
+		optional int64 course_accuracy = 21;
+	}
+	optional Location location = 2;
+}
+
+message AppleWLoc {
+	optional int64 unknown_value0 = 1;
+	repeated WifiDevice wifi_devices = 2;
+	optional int32 num_cell_results = 3;
+	optional int32 num_wifi_results = 4; // number of neighbouring results to return; 1 = requested BSSIDs only
+	optional string app_bundle_id = 5;
+}

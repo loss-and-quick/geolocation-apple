@@ -1,0 +1,6 @@
+# Single source of truth for the pinned Rust toolchain. Read by flake.nix
+# (rust-bin.fromRustupToolchainFile — the dev shell) and by rustup for a bare
+# `cargo` outside the dev shell. Bump the channel here and every consumer follows.
+[toolchain]
+channel = "1.96.1"
+components = ["rustfmt", "clippy"]
