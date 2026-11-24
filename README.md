@@ -39,6 +39,22 @@ nix develop            # drop into the pinned toolchain
 cargo build --release
 ```
 
+## Nix
+
+The flake exposes the CLI as `packages.default`, plus `overlays.default` for
+consuming it from another flake:
+
+```sh
+nix run github:loss-and-quick/geolocation-apple -- a4:2b:8c:11:22:33
+nix build github:loss-and-quick/geolocation-apple
+```
+
+`rustls` uses AWS-LC as its crypto provider, so the package links nixpkgs'
+`aws-lc`: nixpkgs' cargo setup hook exports `AWS_LC_SYS_USE_SYSTEM=1`, and
+`aws-lc-sys` then panics instead of compiling its vendored C sources unless it
+finds a system AWS-LC through `pkg-config`. The dev shell sets the same variable
+for the same reason.
+
 ## CLI usage
 
 ```sh
